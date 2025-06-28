@@ -1,0 +1,79 @@
+// src/components/home/ArticlesList.jsx
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import axios from "axios";
+
+const ArticlesList = () => {
+  const [articles, setArticles] = useState([]);
+
+  useEffect(() => {
+    AOS.init({ once: true, duration: 800 });
+
+    const fetchArticles = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/articles");
+        setArticles(res.data);
+      } catch (err) {
+        console.error("Gagal memuat artikel:", err);
+      }
+    };
+
+    fetchArticles();
+  }, []);
+
+  return (
+    <section className="py-20 px-6 md:px-16 bg-[#F8F9FA] min-h-[80vh] flex flex-col justify-center">
+      <div className="max-w-7xl mx-auto w-full">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-[#1F2937] text-center mb-8" data-aos="fade-up">Artikel & Panduan</h2>
+        <p className="text-lg text-[#374151] text-center mb-10" data-aos="fade-up" data-aos-delay="100">
+          Kumpulan artikel dan panduan seputar pertanian dan pemupukan
+        </p>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+          {articles.map((a, idx) => (
+            <div
+              key={a._id}
+              className="bg-white rounded-2xl shadow p-6 flex flex-col h-full transition hover:shadow-xl"
+              data-aos="fade-up"
+              data-aos-delay={100 + idx * 100}
+            >
+              <img
+                src={a.img}
+                alt={a.title}
+                className="w-full aspect-[4/3] object-cover rounded-xl shadow-sm mb-6"
+              />
+              <div className="text-xs text-gray-400 mb-2 flex items-center gap-2">
+                <span>{a.category}</span>
+                <span className="mx-1">•</span>
+                <span>{a.date}</span>
+              </div>
+              <div className="font-semibold text-[20px] text-[#1F2937] mb-2 leading-snug">
+                <Link to={`/artikel/${a.slug}`}>{a.title}</Link>
+              </div>
+              <div className="text-[16px] text-[#6B7280] mb-5 line-clamp-2">{a.desc}</div>
+              <Link
+                to={`/artikel/${a.slug}`}
+                className="text-[#10B981] hover:underline font-medium inline-flex items-center gap-1 mt-auto transition"
+              >
+                Baca Selengkapnya
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={2}
+                  stroke="currentColor"
+                  className="w-4 h-4 ml-1"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17.25 12H6.75m7.5 0l-3-3m3 3l-3 3" />
+                </svg>
+              </Link>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default ArticlesList;
