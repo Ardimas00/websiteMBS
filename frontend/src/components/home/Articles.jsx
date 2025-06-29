@@ -38,11 +38,21 @@ const ArticlesList = () => {
               data-aos="fade-up"
               data-aos-delay={100 + idx * 100}
             >
-              <img
-                src={a.img}
-                alt={a.title}
-                className="w-full aspect-[4/3] object-cover rounded-xl shadow-sm mb-6"
-              />
+              {a.img && (
+                <img
+                  src={
+                    a.img.startsWith("http")
+                      ? a.img
+                      : `http://localhost:5000${a.img}`
+                  }
+                  alt={a.title}
+                  className="w-full aspect-[4/3] object-cover rounded-xl shadow-sm mb-6"
+                  onError={(e) => {
+                    console.error('Error loading image:', a.img);
+                    e.target.style.display = 'none';
+                  }}
+                />
+              )}
               <div className="text-xs text-gray-400 mb-2 flex items-center gap-2">
                 <span>{a.category}</span>
                 <span className="mx-1">•</span>

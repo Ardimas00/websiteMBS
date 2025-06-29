@@ -80,12 +80,17 @@ export default function ProductCatalog() {
                   }
                   alt={p.name}
                   className="w-full max-h-48 object-contain rounded-xl shadow-sm mb-6 bg-white border border-gray-100 p-2"
+                  onError={(e) => {
+                    console.error('Error loading image:', p.imageUrl);
+                    e.target.style.display = 'none';
+                  }}
                 />
-
               )}
               <div className="font-semibold text-[20px] text-[#1F2937] mb-2">{p.name}</div>
               <div className="text-[16px] text-[#6B7280] mb-2">{p.description}</div>
-              <div className="text-[15px] text-[#374151] italic mb-5">{p.application}</div>
+              {p.application && (
+                <div className="text-[15px] text-[#374151] italic mb-5">{p.application}</div>
+              )}
               <a
                 href="#kontak"
                 className="bg-[#10B981] hover:bg-green-700 text-white rounded-xl shadow px-6 py-2 font-medium mt-auto self-start transition"

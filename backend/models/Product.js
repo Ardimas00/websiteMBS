@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const productSchema = new mongoose.Schema({
   name: String,
   description: String,
+  application: String,
   imageUrl: String
 }, { timestamps: true });
 

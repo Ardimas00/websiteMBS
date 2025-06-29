@@ -44,27 +44,9 @@ app.post('/articles', async (req, res) => res.json(await new Article(req.body).s
 app.put('/articles/:id', async (req, res) => res.json(await Article.findByIdAndUpdate(req.params.id, req.body, { new: true })));
 app.delete('/articles/:id', async (req, res) => res.json(await Article.findByIdAndDelete(req.params.id)));
 
-// 📤 UPLOAD GAMBAR via POST /upload
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, 'public/uploads');
-  },
-  filename: (req, file, cb) => {
-    const filename = Date.now() + '-' + file.originalname;
-    cb(null, filename);
-  }
-});
-const upload = multer({ storage });
-
-app.post('/upload', upload.single('image'), (req, res) => {
-  if (!req.file) return res.status(400).json({ error: 'No file uploaded' });
-  res.json({ url: `/uploads/${req.file.filename}` });
-});
-
+// 📤 UPLOAD GAMBAR - Menggunakan route terpisah
 const uploadRoute = require('./routes/upload');
-
-app.use('/upload', uploadRoute); // ⬅️ ini WAJIB agar route aktif
-app.use('/uploads', express.static('public/uploads')); // ⬅️ agar file bisa diakses oleh browser
+app.use('/upload', uploadRoute);
 
 // 🚀 Jalankan server
 app.listen(5000, () => {

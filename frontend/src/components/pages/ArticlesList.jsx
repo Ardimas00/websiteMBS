@@ -1,130 +1,117 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
-
-const articles = [
-  {
-    slug: "kebun-sayur-pekarangan",
-    title: "Cara Mudah Memulai Kebun Sayur di Pekarangan Rumah",
-    desc: "Panduan langkah-langkah praktis menanam sayuran sendiri di lahan terbatas, cocok untuk pemula dan anak muda.",
-    img: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=400&q=80",
-    category: "Tips Praktis",
-    date: "27 Juni 2025"
-  },
-  {
-    slug: "jenis-pupuk-hortikultura",
-    title: "Mengenal Jenis Pupuk Dasar untuk Tanaman Hortikultura",
-    desc: "Penjelasan singkat tentang pupuk organik dan anorganik, serta tips memilih pupuk yang tepat untuk hasil maksimal.",
-    img: "https://images.unsplash.com/photo-1464983953574-0892a716854b?auto=format&fit=crop&w=400&q=80",
-    category: "Panduan Pemupukan",
-    date: "27 Juni 2025"
-  },
-  {
-    slug: "tips-tanaman-buah-lebat",
-    title: "Tips Merawat Tanaman Buah Agar Berbuah Lebat di Lahan Sempit",
-    desc: "Tips praktis memilih varietas, pemangkasan, dan pemupukan agar tanaman buah tetap produktif meski di kebun kecil.",
-    img: "https://images.unsplash.com/photo-1511690743698-d9d85f2fbf38?auto=format&fit=crop&w=400&q=80",
-    category: "Tips Perkebunan",
-    date: "27 Juni 2025"
-  },
-  {
-    slug: "kompos-rumah-organik",
-    title: "Panduan Singkat Membuat Kompos Sendiri di Rumah",
-    desc: "Langkah-langkah sederhana membuat kompos dari sampah dapur dan kebun, ramah lingkungan dan hemat biaya.",
-    img: "https://images.unsplash.com/photo-1501004318641-b39e6451bec6?auto=format&fit=crop&w=400&q=80",
-    category: "Organik & Lingkungan",
-    date: "27 Juni 2025"
-  },
-  {
-    slug: "kesalahan-pemula-berkebun",
-    title: "5 Kesalahan Umum Pemula Saat Menanam & Cara Menghindarinya",
-    desc: "Ringkasan kesalahan yang sering dilakukan pemula (penyiraman, pemupukan, pemilihan bibit, dsb) dan solusi mudahnya.",
-    img: "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=400&q=80",
-    category: "Tips Praktis",
-    date: "27 Juni 2025"
-  },
-  {
-    slug: "pupuk-organik-vs-anorganik",
-    title: "Memahami Perbedaan Pupuk Organik dan Anorganik",
-    desc: "Pelajari perbedaan mendasar antara pupuk organik dan anorganik, kelebihan, kekurangan, serta rekomendasi penggunaannya.",
-    img: "https://images.unsplash.com/photo-1465101046530-73398c7f28ca?auto=format&fit=crop&w=400&q=80",
-    category: "Pemupukan",
-    date: "15 Juni 2023"
-  },
-  {
-    slug: "panduan-pemupukan-pemula",
-    title: "Panduan Lengkap Pemupukan untuk Pemula",
-    desc: "Ikuti panduan langkah demi langkah untuk pemupukan yang tepat, mulai dari pemilihan pupuk, dosis, hingga waktu aplikasi.",
-    img: "https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=400&q=80",
-    category: "Panduan",
-    date: "10 Juni 2023"
-  },
-  {
-    slug: "keamanan-pupuk-tanaman-pangan",
-    title: "Memastikan Keamanan Pupuk untuk Tanaman Pangan",
-    desc: "Tips dan panduan memilih pupuk yang aman untuk tanaman pangan, termasuk cara aplikasi yang benar untuk hasil maksimal.",
-    img: "https://images.unsplash.com/photo-1465101178521-c1a9136a3b99?auto=format&fit=crop&w=400&q=80",
-    category: "Keamanan Pangan",
-    date: "5 Juni 2023"
-  },
-  // Tambahkan artikel lainnya di sini
-];
+import axios from "axios";
 
 const ArticlesList = () => {
-  useEffect(() => { AOS.init({ once: true, duration: 800 }); }, []);
+  const [articles, setArticles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    AOS.init({ once: true, duration: 800 });
+
+    const fetchArticles = async () => {
+      try {
+        const res = await axios.get("http://localhost:5000/articles");
+        setArticles(res.data);
+      } catch (err) {
+        console.error("Gagal memuat artikel:", err);
+        setError("Gagal memuat artikel");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchArticles();
+  }, []);
+
+  if (loading) {
+    return (
+      <section className="py-20 px-6 md:px-16 bg-[#F8F9FA] min-h-[80vh] flex items-center justify-center">
+        <p>Loading artikel...</p>
+      </section>
+    );
+  }
+
+  if (error) {
+    return (
+      <section className="py-20 px-6 md:px-16 bg-[#F8F9FA] min-h-[80vh] flex items-center justify-center">
+        <p className="text-red-500">{error}</p>
+      </section>
+    );
+  }
+
   return (
     <section className="py-20 px-6 md:px-16 bg-[#F8F9FA] min-h-[80vh] flex flex-col justify-center">
-  <div className="max-w-7xl mx-auto w-full">
-    <h2 className="text-4xl md:text-5xl font-extrabold text-[#1F2937] text-center mb-8" data-aos="fade-up">Artikel & Panduan</h2>
-    <p className="text-lg text-[#374151] text-center mb-10" data-aos="fade-up" data-aos-delay="100">Kumpulan artikel dan panduan seputar pertanian dan pemupukan</p>
-    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-      {articles.map((a, idx) => (
-        <div
-          key={a.slug}
-          className="bg-white rounded-2xl shadow p-6 flex flex-col h-full transition hover:shadow-xl"
-          data-aos="fade-up"
-          data-aos-delay={100 + idx * 100}
-        >
-          <img
-            src={a.img}
-            alt={a.title}
-            className="w-full aspect-[4/3] object-cover rounded-xl shadow-sm mb-6"
-          />
-          <div className="text-xs text-gray-400 mb-2 flex items-center gap-2">
-            <span>{a.category}</span>
-            <span className="mx-1">•</span>
-            <span>{a.date}</span>
+      <div className="max-w-7xl mx-auto w-full">
+        <h2 className="text-4xl md:text-5xl font-extrabold text-[#1F2937] text-center mb-8" data-aos="fade-up">Artikel & Panduan</h2>
+        <p className="text-lg text-[#374151] text-center mb-10" data-aos="fade-up" data-aos-delay="100">Kumpulan artikel dan panduan seputar pertanian dan pemupukan</p>
+        
+        {articles.length === 0 ? (
+          <div className="text-center py-10">
+            <p className="text-gray-500">Belum ada artikel tersedia.</p>
           </div>
-          <div className="font-semibold text-[20px] text-[#1F2937] mb-2 leading-snug">
-            <Link to={`/artikel/${a.slug}`}>{a.title}</Link>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+            {articles.map((a, idx) => (
+              <div
+                key={a._id}
+                className="bg-white rounded-2xl shadow p-6 flex flex-col h-full transition hover:shadow-xl"
+                data-aos="fade-up"
+                data-aos-delay={100 + idx * 100}
+              >
+                {a.img && (
+                  <img
+                    src={
+                      a.img.startsWith("http")
+                        ? a.img
+                        : `http://localhost:5000${a.img}`
+                    }
+                    alt={a.title}
+                    className="w-full aspect-[4/3] object-cover rounded-xl shadow-sm mb-6"
+                    onError={(e) => {
+                      console.error('Error loading image:', a.img);
+                      e.target.style.display = 'none';
+                    }}
+                  />
+                )}
+                <div className="text-xs text-gray-400 mb-2 flex items-center gap-2">
+                  <span>{a.category || 'Umum'}</span>
+                  <span className="mx-1">•</span>
+                  <span>{a.date || new Date(a.createdAt).toLocaleDateString('id-ID')}</span>
+                </div>
+                <div className="font-semibold text-[20px] text-[#1F2937] mb-2 leading-snug">
+                  <Link to={`/artikel/${a.slug || a._id}`}>{a.title}</Link>
+                </div>
+                <div className="text-[16px] text-[#6B7280] mb-5 line-clamp-2">{a.desc}</div>
+                <Link
+                  to={`/artikel/${a.slug || a._id}`}
+                  className="text-[#10B981] hover:underline font-medium inline-flex items-center gap-1 mt-auto transition"
+                >
+                  Baca Selengkapnya
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                    stroke="currentColor"
+                    className="w-4 h-4 ml-1"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M17.25 12H6.75m7.5 0l-3-3m3 3l-3 3"
+                    />
+                  </svg>
+                </Link>
+              </div>
+            ))}
           </div>
-          <div className="text-[16px] text-[#6B7280] mb-5 line-clamp-2">{a.desc}</div>
-          <Link
-            to={`/artikel/${a.slug}`}
-            className="text-[#10B981] hover:underline font-medium inline-flex items-center gap-1 mt-auto transition"
-          >
-            Baca Selengkapnya
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2}
-              stroke="currentColor"
-              className="w-4 h-4 ml-1"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M17.25 12H6.75m7.5 0l-3-3m3 3l-3 3"
-              />
-            </svg>
-          </Link>
-        </div>
-      ))}
-    </div>
-  </div>
-</section>
+        )}
+      </div>
+    </section>
   );
 };
 

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Upload Gambar</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            background: #10B981;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #059669;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 4px;
+        }
+        .success {
+            background: #D1FAE5;
+            border: 1px solid #10B981;
+            color: #065F46;
+        }
+        .error {
+            background: #FEE2E2;
+            border: 1px solid #EF4444;
+            color: #991B1B;
+        }
+        .image-preview {
+            max-width: 300px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Test Upload Gambar</h1>
+    
+    <div class="form-group">
+        <label for="image">Pilih Gambar:</label>
+        <input type="file" id="image" accept="image/*">
+    </div>
+    
+    <button onclick="uploadImage()">Upload Gambar</button>
+    
+    <div id="result"></div>
+    
+    <script>
+        async function uploadImage() {
+            const fileInput = document.getElementById('image');
+            const resultDiv = document.getElementById('result');
+            
+            if (!fileInput.files[0]) {
+                resultDiv.innerHTML = '<div class="result error">Pilih file gambar terlebih dahulu</div>';
+                return;
+            }
+            
+            const formData = new FormData();
+            formData.append('image', fileInput.files[0]);
+            
+            try {
+                const response = await fetch('http://localhost:5000/upload', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    resultDiv.innerHTML = `
+                        <div class="result success">
+                            <h3>Upload Berhasil!</h3>
+                            <p><strong>URL:</strong> ${data.url}</p>
+                            <p><strong>Full URL:</strong> http://localhost:5000${data.url}</p>
+                            <img src="http://localhost:5000${data.url}" alt="Preview" class="image-preview">
+                        </div>
+                    `;
+                } else {
+                    resultDiv.innerHTML = `<div class="result error">Error: ${data.error || 'Upload gagal'}</div>`;
+                }
+            } catch (error) {
+                resultDiv.innerHTML = `<div class="result error">Error: ${error.message}</div>`;
+            }
+        }
+    </script>
+</body>
+</html> 
