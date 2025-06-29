@@ -33,7 +33,7 @@ const ArticlesList = () => {
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-          {articles.map((a, idx) => {
+          {articles.slice(0, 3).map((a, idx) => {
             const imageUrl =
               a.img?.startsWith("http")
                 ? a.img
@@ -73,7 +73,7 @@ const ArticlesList = () => {
                 <div className="text-[16px] text-[#6B7280] mb-5 line-clamp-2">{a.desc}</div>
 
                 <Link
-                  to={`/artikel/${a.slug}`}
+                  to={`/artikel/${a.slug || a._id}`}
                   className="text-[#10B981] hover:underline font-medium inline-flex items-center gap-1 mt-auto transition"
                 >
                   Baca Selengkapnya
@@ -91,6 +91,16 @@ const ArticlesList = () => {
               </div>
             );
           })}
+        </div>
+
+        {/* Tombol ke daftar artikel lengkap */}
+        <div className="mt-10 text-center">
+          <Link
+            to="/artikel"
+            className="inline-block bg-[#10B981] hover:bg-green-700 text-white px-6 py-3 rounded-lg font-semibold shadow transition"
+          >
+            Lihat Semua Artikel
+          </Link>
         </div>
       </div>
     </section>
