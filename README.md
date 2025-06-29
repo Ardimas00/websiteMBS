@@ -49,7 +49,6 @@ websiteMBS/
 │   └── public/
 ├── create-uploads-folder.ps1  # Script buat folder upload
 ├── start.ps1              # Script untuk menjalankan keduanya
-└── test-upload.html       # Test upload gambar
 ```
 
 ## 🔧 Fitur Utama
