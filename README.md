@@ -1,4 +1,4 @@
-# Website MBS - PT Barokah Jir
+# Website MBS - PT Barokah
 
 Website perusahaan pupuk PT Barokah dengan fitur katalog produk, artikel, dan admin panel.
 
