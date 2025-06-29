@@ -16,6 +16,7 @@ app.use(express.json());
 // 💾 Serve folder upload secara publik
 app.use('/uploads', express.static('public/uploads'));
 
+
 // 🧠 Koneksi MongoDB
 mongoose.connect('mongodb://localhost:27017/websitembs')
   .then(() => console.log('✅ Connected to MongoDB'))
