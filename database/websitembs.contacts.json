@@ -1,0 +1,72 @@
+[{
+  "_id": {
+    "$oid": "686266ffa1cbfc42436bfd43"
+  },
+  "name": "csacsacsa",
+  "email": "dimswahyu@students.amikom.ac.id",
+  "message": "cascsacsacsa",
+  "createdAt": {
+    "$date": "2025-06-30T10:29:19.711Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "68626731a1cbfc42436bfd45"
+  },
+  "name": "pak Adi",
+  "email": "dimswahyu@students.amikom.ac.id",
+  "message": "hai anjing",
+  "createdAt": {
+    "$date": "2025-06-30T10:30:09.630Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6863962f50e707d48cae40f0"
+  },
+  "name": "amir",
+  "email": "hfkn@hfkn.com",
+  "message": "sedang mencoba",
+  "createdAt": {
+    "$date": "2025-07-01T08:02:55.866Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6863969150e707d48cae40f2"
+  },
+  "name": "amir",
+  "email": "hfkn@hfkn.com",
+  "message": "sedang mencoba\n",
+  "createdAt": {
+    "$date": "2025-07-01T08:04:33.112Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6863972e50e707d48cae40f8"
+  },
+  "name": "amir",
+  "email": "majuberkahsantosa@gmail.com",
+  "message": "coba lagi\n",
+  "createdAt": {
+    "$date": "2025-07-01T08:07:10.019Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "686397b751ef93558d32f991"
+  },
+  "name": "amir",
+  "email": "majuberkahsantosa@gmail.com",
+  "message": "coba",
+  "createdAt": {
+    "$date": "2025-07-01T08:09:27.278Z"
+  },
+  "__v": 0
+}]

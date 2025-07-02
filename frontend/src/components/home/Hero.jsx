@@ -29,7 +29,7 @@ const Hero = () => {
           className="text-lg md:text-xl text-white/90 mb-8 max-w-2xl"
           data-aos="fade-up" data-aos-delay="200" data-aos-duration="1000"
         >
-          Kami menyediakan berbagai jenis pupuk untuk membantu pertumbuhan dan produktivitas tanaman Anda
+          Kami menyediakan berbagai jenis pupuk pilihan untuk membantu meningkatkan pertumbuhan, ketahanan, dan produktivitas tanaman Anda secara&nbsp;maksimal.
         </p>
         <div className="flex gap-4 mb-8 flex-wrap">
           <a
@@ -40,7 +40,7 @@ const Hero = () => {
             data-aos-duration="900"
             data-aos-easing="ease-out-cubic"
           >
-            Lihat Katalog
+            Lihat Produk
           </a>
           <a
             href="#kontak"

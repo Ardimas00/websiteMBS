@@ -1,8 +1,16 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { FaBoxOpen, FaNewspaper } from 'react-icons/fa';
+
+import LogoutIcon from "./LogoutIcon";
 
 export default function AdminDashboard() {
+  // Info ringkas dashboard
   const [products, setProducts] = useState([]);
+  const [articles, setArticles] = useState([]);
+
+  // Untuk manajemen produk
   const [form, setForm] = useState({ name: '', description: '', imageUrl: '' });
   const [editId, setEditId] = useState(null);
   const [error, setError] = useState('');
@@ -77,94 +85,33 @@ export default function AdminDashboard() {
   };
 
   useEffect(() => {
-    load();
+    // Info ringkas
+    axios.get('http://localhost:5000/products').then(res => setProducts(res.data));
+    axios.get('http://localhost:5000/articles').then(res => setArticles(res.data));
   }, []);
 
   return (
-    <div className="p-4">
-      <h2 className="text-2xl font-semibold mb-4">Manajemen Produk</h2>
-
-      <div className="space-y-2 mb-6">
-        {error && <p className="text-red-500">{error}</p>}
-        <input
-          className="w-full border p-2 rounded"
-          value={form.name}
-          onChange={e => setForm({ ...form, name: e.target.value })}
-          placeholder="Nama Produk"
-        />
-        <input
-          className="w-full border p-2 rounded"
-          value={form.description}
-          onChange={e => setForm({ ...form, description: e.target.value })}
-          placeholder="Deskripsi"
-        />
-        <input
-          className="w-full border p-2 rounded"
-          value={form.imageUrl}
-          onChange={e => setForm({ ...form, imageUrl: e.target.value })}
-          placeholder="URL Gambar (opsional)"
-        />
-        <input
-          type="file"
-          className="w-full border p-2 rounded"
-          onChange={e => setFile(e.target.files[0])}
-        />
-        <button
-          className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 disabled:opacity-50"
-          onClick={save}
-          disabled={!form.name.trim() || !form.description.trim()}
-        >
-          {editId ? 'Update Produk' : 'Tambah Produk'}
-        </button>
-        {editId && (
-          <button
-            className="ml-4 text-gray-600 hover:underline"
-            onClick={() => {
-              setForm({ name: '', description: '', imageUrl: '' });
-              setEditId(null);
-              setError('');
-              setFile(null);
-            }}
-          >
-            Batal Edit
-          </button>
-        )}
+    <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-blue-50 via-white to-green-100 p-8">
+      <LogoutIcon />
+      <a href="/" className="inline-flex items-center mb-6 px-4 py-2 bg-white/80 hover:bg-white text-gray-700 shadow rounded-full border border-gray-200 transition group">
+        <svg className="w-5 h-5 mr-2 text-blue-500 group-hover:-translate-x-1 transition" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7" /></svg>
+        Kembali ke Homepage
+      </a>
+      <h1 className="text-3xl font-extrabold mb-10 text-gray-800 tracking-tight">Admin Dashboard</h1>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-4xl">
+        <Link to="/admin/products" className="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center hover:shadow-2xl transition group border border-gray-100">
+          <FaBoxOpen className="text-4xl text-green-600 mb-4 group-hover:scale-110 group-hover:text-green-700 transition" />
+          <div className="text-xl font-semibold mb-2">Manajemen Produk</div>
+          <div className="text-gray-600 mb-4 text-center">Kelola produk, tambah baru, edit, dan hapus produk.</div>
+          <div className="text-2xl font-bold text-green-700">{products.length} Produk</div>
+        </Link>
+        <Link to="/admin/articles" className="bg-white rounded-xl shadow-lg p-8 flex flex-col items-center hover:shadow-2xl transition group border border-gray-100">
+          <FaNewspaper className="text-4xl text-blue-600 mb-4 group-hover:scale-110 group-hover:text-blue-700 transition" />
+          <div className="text-xl font-semibold mb-2">Manajemen Artikel</div>
+          <div className="text-gray-600 mb-4 text-center">Kelola artikel, tambah baru, edit, dan hapus artikel.</div>
+          <div className="text-2xl font-bold text-blue-700">{articles.length} Artikel</div>
+        </Link>
       </div>
-
-      <table className="w-full table-auto border-collapse">
-        <thead>
-          <tr className="bg-gray-200">
-            <th className="border px-4 py-2">Nama</th>
-            <th className="border px-4 py-2">Deskripsi</th>
-            <th className="border px-4 py-2">Gambar</th>
-            <th className="border px-4 py-2">Aksi</th>
-          </tr>
-        </thead>
-        <tbody>
-          {products.map(p => (
-            <tr key={p._id} className="hover:bg-gray-100">
-              <td className="border px-4 py-2">{p.name}</td>
-              <td className="border px-4 py-2">{p.description}</td>
-              <td className="border px-4 py-2">
-                {p.imageUrl ? (
-                  <img
-                    src={
-                      p.imageUrl?.startsWith('http')
-                        ? p.imageUrl
-                        : `http://localhost:5000${p.imageUrl}`
-                    }
-                    alt={p.name}
-                    className="h-16 object-contain mx-auto" />
-                ) : '—'}
-              </td>
-              <td className="border px-4 py-2 space-x-2">
-                <button className="text-blue-500 hover:underline" onClick={() => startEdit(p)}>Edit</button>
-                <button className="text-red-500 hover:underline" onClick={() => remove(p._id)}>Hapus</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
     </div>
   );
 }

@@ -18,12 +18,14 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import AdminLogin from './admin/AdminLogin';
 import AdminDashboard from './admin/AdminDashboard';
 import AdminArticles from './admin/AdminArticles';
+import AdminProducts from './admin/AdminProducts';
+import RequireAdminAuth from './admin/RequireAdminAuth';
 
 function AppContent() {
   const [openMenu, setOpenMenu] = useState(false);
   const location = useLocation();
 
-  const hideNavbarPaths = ['/login', '/admin', '/admin/articles'];
+  const hideNavbarPaths = ['/login', '/admin', '/admin/articles', '/admin/products'];
 
   useEffect(() => {
     AOS.init({
@@ -68,8 +70,21 @@ function AppContent() {
 
         {/* Admin Pages */}
         <Route path="/login" element={<AdminLogin />} />
-        <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/admin/articles" element={<AdminArticles />} />
+        <Route path="/admin" element={
+          <RequireAdminAuth>
+            <AdminDashboard />
+          </RequireAdminAuth>
+        } />
+        <Route path="/admin/products" element={
+          <RequireAdminAuth>
+            <AdminProducts />
+          </RequireAdminAuth>
+        } />
+        <Route path="/admin/articles" element={
+          <RequireAdminAuth>
+            <AdminArticles />
+          </RequireAdminAuth>
+        } />
       </Routes>
     </div>
   );

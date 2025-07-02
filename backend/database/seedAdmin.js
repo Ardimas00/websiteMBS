@@ -7,8 +7,8 @@ mongoose.connect('mongodb://localhost:27017/websitembs', {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(async () => {
-  const username = 'admin';
-  const password = 'admin123';
+  const username = 'admin2';
+  const password = 'admin';
   const passwordHash = await bcrypt.hash(password, 10);
 
   const existing = await Admin.findOne({ username });

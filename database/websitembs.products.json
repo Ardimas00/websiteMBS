@@ -1,0 +1,254 @@
+[{
+  "_id": {
+    "$oid": "6863d5595b34a970a3b4ae5a"
+  },
+  "name": "NPK JATI WANGI (13/6/27/4/0,65B)",
+  "description": "Kandungan: 13% Nitrogen, 6% Fosfor (P2O5), 27% Kalium (K2O), 4% Sulfur, 0,65% Boron\nFungsi: Pupuk majemuk dengan kandungan kalium tinggi, cocok untuk fase generatif tanaman (pembungaan dan pembuahan)\nAplikasi: Tanaman buah, sayuran saat berbuah, tanaman hias berbunga\n",
+  "application": "Tanaman buah, sayuran saat berbuah, tanaman hias berbunga",
+  "imageUrl": "/uploads/1751373254428-Pupuk NPK Jati Wangi 13-6-27-4 Mg+0,65B.jpg",
+  "category": "PUPUK NPK",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-07-01T12:32:25.031Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-01T12:43:37.378Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6863d5595b34a970a3b4ae5b"
+  },
+  "name": "NPK JATI WANGI (12/12/17/2)",
+  "description": "Kandungan: 12% Nitrogen, 12% Fosfor, 17% Kalium, 2% Sulfur\nFungsi: Pupuk seimbang untuk pertumbuhan vegetatif dan generatif\nAplikasi: Pupuk dasar atau pemeliharaan rutin tanaman\n",
+  "application": "Pupuk dasar atau pemeliharaan rutin tanaman",
+  "imageUrl": "/uploads/1751373265040-Pupuk NPK JATIWANGI 12-12-17+2Mg0.jpeg",
+  "category": "PUPUK NPK",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-07-01T12:32:25.033Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-01T12:44:20.282Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6863d5595b34a970a3b4ae5d"
+  },
+  "name": "NPK MAHKOTA (13/6/27/4/0,65B)",
+  "description": "Kandungan sama dengan NPK Jati Wangi versi pertama\nFungsi dan aplikasi serupa untuk fase generatif\n",
+  "application": "Fungsi dan aplikasi serupa untuk fase generatif",
+  "imageUrl": "/uploads/1751373408025-NPK mahkota 13-6-27-4 + 0.65 B.webp",
+  "category": "PUPUK NPK",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-07-01T12:32:25.034Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-01T12:45:15.001Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6863d5595b34a970a3b4ae5e"
+  },
+  "name": "NPK MESTI BIRU LAOUYING (16/16/16+TE)",
+  "description": "Kandungan: 16% N, 16% P, 16% K + Trace Elements (unsur mikro)\nFungsi: Pupuk seimbang lengkap dengan unsur mikro\nAplikasi: Pupuk serbaguna untuk semua fase pertumbuhan\n",
+  "application": "Pupuk serbaguna untuk semua fase pertumbuhan",
+  "imageUrl": "/uploads/1751373415600-NPK MESTI BIRU LAOUYING .jpg",
+  "category": "PUPUK NPK",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-07-01T12:32:25.034Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-01T12:45:19.103Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6863d5595b34a970a3b4ae5f"
+  },
+  "name": "NITREA GRANUL (UREA)",
+  "description": "Kandungan: 46% Nitrogen\nFungsi: Sumber nitrogen untuk pertumbuhan vegetatif (daun, batang)\nAplikasi: Fase vegetatif, tanaman hijau, rumput\n",
+  "application": "Fase vegetatif, tanaman hijau, rumput",
+  "imageUrl": "/uploads/1751373422479-NITREA GRANUL (UREA).png",
+  "category": "PUPUK TUNGGAL",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-07-01T12:32:25.034Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-01T12:45:33.639Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6863d5595b34a970a3b4ae60"
+  },
+  "name": "KCL Belarus",
+  "description": "Kandungan: 60% Kalium Chlorida\nFungsi: Sumber kalium untuk kualitas buah, ketahanan penyakit\nAplikasi: Tanaman buah, sayuran, fase generatif\n",
+  "application": "Tanaman buah, sayuran, fase generatif",
+  "imageUrl": "/uploads/1751373434575-KCL Belarus.jpeg",
+  "category": "PUPUK TUNGGAL",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-07-01T12:32:25.034Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-01T12:45:48.714Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6863d5595b34a970a3b4ae61"
+  },
+  "name": "ROCK PHOSPHATE EGYPT",
+  "description": "Kandungan: Fosfor alami (slow release)\nFungsi: Sumber fosfor jangka panjang untuk akar dan bunga\nAplikasi: Pupuk dasar, tanah masam\n",
+  "application": "Pupuk dasar, tanah masam",
+  "imageUrl": "/uploads/1751373446159-ROCK PHOSPHATE EGYPT.jpg",
+  "category": "PUPUK TUNGGAL",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-07-01T12:32:25.034Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-01T12:46:03.304Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6863d5595b34a970a3b4ae62"
+  },
+  "name": "CaMg JATIBUMI",
+  "description": "Kandungan: Kalsium dan Magnesium\nFungsi: Memperbaiki pH tanah, struktur tanah, mencegah defisiensi Ca-Mg\nAplikasi: Tanah masam, tanaman yang butuh kalsium tinggi\n",
+  "application": "Tanah masam, tanaman yang butuh kalsium tinggi",
+  "imageUrl": "",
+  "category": "PEMBENAH TANAH",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-07-01T12:32:25.034Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-01T12:46:21.911Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6863d5595b34a970a3b4ae63"
+  },
+  "name": "MAGFORA DOLOMITE MESH 100",
+  "description": "Kandungan: Kalsium Karbonat + Magnesium Karbonat\nFungsi: Menaikkan pH tanah masam, sumber Ca dan Mg\nAplikasi: Pengapuran tanah masam, mesh 100 = tekstur halus\n",
+  "application": "Pengapuran tanah masam, mesh 100 = tekstur halus",
+  "imageUrl": "",
+  "category": "PEMBENAH TANAH",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-07-01T12:32:25.034Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-01T12:46:38.918Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6863d5595b34a970a3b4ae64"
+  },
+  "name": "BORATE (BORON)",
+  "description": "Kandungan: Unsur Boron\nFungsi: Pembentukan dinding sel, pembuahan, transport gula\nAplikasi: Tanaman buah, sayuran berbuah, saat berbunga\n",
+  "application": "Tanaman buah, sayuran berbuah, saat berbunga",
+  "imageUrl": "",
+  "category": "PUPUK MIKRO",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-07-01T12:32:25.035Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-01T12:46:50.421Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6863d5595b34a970a3b4ae65"
+  },
+  "name": "PUPUK MIKRO SAFA 24 (Cu 8% Zn 8% B 8%)",
+  "description": "Kandungan: Tembaga, Seng, Boron masing-masing 8%\nFungsi: Mengatasi defisiensi unsur mikro, meningkatkan metabolisme\nAplikasi: Semprot daun, tanaman yang menunjukkan gejala defisiensi\n",
+  "application": "Semprot daun, tanaman yang menunjukkan gejala defisiensi",
+  "imageUrl": "",
+  "category": "PUPUK MIKRO",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-07-01T12:32:25.035Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-01T12:47:02.590Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6863d5595b34a970a3b4ae66"
+  },
+  "name": "PUPUK MIKRO MAJEMUK PRIMATAN (Cu Zn Fe B)",
+  "description": "Kandungan: Tembaga, Seng, Besi, Boron\nFungsi: Lengkap untuk kebutuhan unsur mikro\nAplikasi: Pemeliharaan rutin, tanaman intensif\n",
+  "application": "Pemeliharaan rutin, tanaman intensif",
+  "imageUrl": "",
+  "category": "PUPUK MIKRO",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-07-01T12:32:25.035Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-01T12:47:13.583Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6863d5595b34a970a3b4ae67"
+  },
+  "name": "MIKORIZA MYCOPIR (GANODERMA)",
+  "description": "Kandungan: Jamur mikoriza dengan Ganoderma\nFungsi: Meningkatkan penyerapan hara, ketahanan tanaman\nAplikasi: Saat tanam, tanaman keras, perkebunan\n",
+  "application": "Saat tanam, tanaman keras, perkebunan",
+  "imageUrl": "",
+  "category": "BIOLOGIS",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-07-01T12:32:25.035Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-01T12:47:26.659Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6863d5595b34a970a3b4ae68"
+  },
+  "name": "FUNGISIDA GANODERMA HYPHOS 45",
+  "description": "Kandungan: Bahan aktif antijamur untuk Ganoderma\nFungsi: Mengendalikan penyakit jamur Ganoderma\nAplikasi: Tanaman yang terserang atau pencegahan\n",
+  "application": "Tanaman yang terserang atau pencegahan",
+  "imageUrl": "",
+  "category": "BIOLOGIS",
+  "__v": 0,
+  "createdAt": {
+    "$date": "2025-07-01T12:32:25.035Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-01T12:47:36.528Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6863d65151ef93558d32fa6b"
+  },
+  "name": "NPK JATI WANGI (15/15/6/4)",
+  "description": "Kandungan: 15% Nitrogen, 15% Fosfor, 6% Kalium, 4% Sulfur\nFungsi: Tinggi N dan P, cocok untuk fase awal pertumbuhan dan pembentukan akar\nAplikasi: Bibit, tanaman muda, fase vegetatif awal\n",
+  "imageUrl": "",
+  "createdAt": {
+    "$date": "2025-07-01T12:36:33.033Z"
+  },
+  "updatedAt": {
+    "$date": "2025-07-01T12:58:01.477Z"
+  },
+  "__v": 0,
+  "category": "PUPUK NPK"
+}]

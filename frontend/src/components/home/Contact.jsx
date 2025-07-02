@@ -1,8 +1,51 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
 const Contact = () => {
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError("");
+    setSuccess("");
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+      setError("Semua field wajib diisi.");
+      return;
+    }
+    // Email regex sederhana
+    if (!/^\S+@\S+\.\S+$/.test(form.email)) {
+      setError("Format email tidak valid.");
+      return;
+    }
+    setLoading(true);
+    try {
+      const formToSend = { ...form, email: "majuberkahsantosa@gmail.com" };
+      const res = await fetch("http://localhost:5000/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formToSend),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        setSuccess("Pesan berhasil dikirim. Terima kasih telah menghubungi kami!");
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        setError(data.error || "Gagal mengirim pesan.");
+      }
+    } catch (err) {
+      setError("Terjadi kesalahan. Coba lagi nanti.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -36,7 +79,7 @@ const Contact = () => {
               </span>
               <div>
                 <div className="font-semibold text-[#1F2937] mb-0.5">Email</div>
-                <a href="mailto:info@ahdapupuk.com" className="text-[#6B7280] text-sm hover:underline">info@ahdapupuk.com</a>
+                <a href="mailto:majuberkahsantosa@gmail.com" className="text-[#6B7280] text-sm hover:underline">majuberkahsantosa@gmail.com</a>
               </div>
             </li>
             <li className="flex items-start gap-4">
@@ -49,7 +92,7 @@ const Contact = () => {
               </span>
               <div>
                 <div className="font-semibold text-[#1F2937] mb-0.5">WhatsApp</div>
-                <a href="https://wa.me/6285784883400" className="text-[#6B7280] text-sm hover:underline">+62 857-8488-3400</a>
+                <a href="https://wa.me/6282351138808" className="text-[#6B7280] text-sm hover:underline">+62 823-5113-8808</a>
               </div>
             </li>
           </ul>
@@ -72,24 +115,56 @@ const Contact = () => {
           </div>
         </div>
         {/* Form Kontak */}
-        <div
+         <div
           className="bg-white rounded-2xl shadow p-8 flex-1 min-w-[320px]"
           data-aos="fade-left"
           data-aos-delay="220"
           data-aos-duration="1000"
           data-aos-easing="ease-out-cubic"
         >
-          <form className="flex flex-col gap-5" action="https://formsubmit.co/emyr@students.amikom.ac.id" method="POST">
+          <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
+            {error && <div className="bg-red-100 text-red-700 rounded-lg px-4 py-2 mb-2 text-sm">{error}</div>}
+            {success && <div className="bg-green-100 text-green-700 rounded-lg px-4 py-2 mb-2 text-sm">{success}</div>}
             <label className="text-[#374151] font-medium mb-1">Nama Lengkap
-              <input type="text" className="mt-1 w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#10B981] transition" placeholder="Nama Lengkap" required />
+              <input
+                type="text"
+                name="name"
+                className="mt-1 w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#10B981] transition"
+                placeholder="Nama Lengkap"
+                value={form.name}
+                onChange={handleChange}
+                required
+              />
             </label>
             <label className="text-[#374151] font-medium mb-1">Email
-              <input type="email" className="mt-1 w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#10B981] transition" placeholder="Email" required />
+              <input
+                type="email"
+                name="email"
+                className="mt-1 w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#10B981] transition"
+                placeholder="Email"
+                value={form.email}
+                onChange={handleChange}
+                required
+              />
             </label>
             <label className="text-[#374151] font-medium mb-1">Pesan
-              <textarea className="mt-1 w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#10B981] transition" placeholder="Pesan" rows="4" required></textarea>
+              <textarea
+                name="message"
+                className="mt-1 w-full border border-gray-200 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-[#10B981] transition"
+                placeholder="Pesan"
+                rows="4"
+                value={form.message}
+                onChange={handleChange}
+                required
+              ></textarea>
             </label>
-            <button type="submit" className="bg-[#10B981] hover:bg-green-700 text-white font-semibold rounded-lg py-3 mt-2 shadow-md transition">Kirim Pesan</button>
+            <button
+              type="submit"
+              className="bg-[#10B981] hover:bg-green-700 text-white font-semibold rounded-lg py-3 mt-2 shadow-md transition disabled:opacity-50"
+              disabled={loading}
+            >
+              {loading ? "Mengirim..." : "Kirim Pesan"}
+            </button>
           </form>
         </div>
       </div>

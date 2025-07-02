@@ -1,6 +1,6 @@
-# Website MBS - PT Barokah
+# Website MBS - PT Maju Berkah Santosa
 
-Website perusahaan pupuk PT Barokah dengan fitur katalog produk, artikel, dan admin panel.
+Website perusahaan pupuk PT Maju Berkah Santosa dengan fitur katalog produk, artikel, dan admin panel.
 
 ## 🚀 Cara Menjalankan Aplikasi
 

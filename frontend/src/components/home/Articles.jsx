@@ -26,7 +26,7 @@ const ArticlesList = () => {
     <section id="artikel" className="py-20 px-6 md:px-16 bg-[#F8F9FA] min-h-[80vh] flex flex-col justify-center">
       <div className="max-w-7xl mx-auto w-full">
         <h2 className="text-4xl md:text-5xl font-extrabold text-[#1F2937] text-center mb-8" data-aos="fade-up">
-          Artikel & Panduan
+          Artikel
         </h2>
         <p className="text-lg text-[#374151] text-center mb-10" data-aos="fade-up" data-aos-delay="100">
           Kumpulan artikel dan panduan seputar pertanian dan pemupukan

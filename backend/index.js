@@ -35,8 +35,16 @@ app.post('/login', async (req, res) => {
 
 // 📦 CRUD PRODUK
 app.get('/products', async (_, res) => res.json(await Product.find()));
-app.post('/products', async (req, res) => {const newProduct = await new Product(req.body).save();res.json(newProduct);});
-app.put('/products/:id', async (req, res) => res.json(await Product.findByIdAndUpdate(req.params.id, req.body, { new: true })));
+app.post('/products', async (req, res) => {
+  console.log('[POST /products] req.body:', req.body);
+  const newProduct = await new Product(req.body).save();
+  res.json(newProduct);
+});
+app.put('/products/:id', async (req, res) => {
+  console.log('[PUT /products/:id] req.body:', req.body);
+  const updated = await Product.findByIdAndUpdate(req.params.id, req.body, { new: true });
+  res.json(updated);
+});
 app.delete('/products/:id', async (req, res) => res.json(await Product.findByIdAndDelete(req.params.id)));
 
 // 📰 CRUD ARTIKEL
@@ -48,6 +56,10 @@ app.delete('/articles/:id', async (req, res) => res.json(await Article.findByIdA
 // 📤 UPLOAD GAMBAR - Menggunakan route terpisah
 const uploadRoute = require('./routes/upload');
 app.use('/upload', uploadRoute);
+
+// 📩 ROUTE KONTAK
+const contactRoute = require('./routes/contact');
+app.use('/contact', contactRoute);
 
 // 🚀 Jalankan server
 app.listen(5000, () => {
