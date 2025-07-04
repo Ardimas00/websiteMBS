@@ -54,13 +54,25 @@ websiteMBS/
 ## 🔧 Fitur Utama
 
 ### Frontend
-- ✅ Halaman Utama dengan Hero, About, Product Catalog
-- ✅ Katalog Produk dengan gambar
-- ✅ Artikel & Panduan (dari database)
-- ✅ Halaman Detail Produk
-- ✅ Halaman Detail Artikel
-- ✅ Admin Panel untuk manajemen produk dan artikel
-- ✅ Upload gambar untuk produk dan artikel
+- ✅ Halaman Utama dengan Hero, About, dan katalog produk
+- ✅ Katalog Produk: daftar produk dengan gambar, harga, dan tombol "Hubungi Kami" (langsung ke WhatsApp dengan pesan otomatis)
+- ✅ Artikel & Panduan: artikel informatif yang dapat dikelola admin
+- ✅ Halaman Detail Produk & Artikel
+- ✅ Form Kontak: kirim pesan langsung ke email admin tanpa menyimpan ke database, reply-to otomatis ke email pengirim
+- ✅ Admin Panel: kelola produk & artikel, upload gambar, dashboard responsif
+- ✅ Upload gambar produk & artikel (drag & drop/file picker)
+- ✅ Autentikasi admin: login admin dengan session berbasis sessionStorage & idle timeout (auto logout jika tidak aktif 15 menit, atau jika semua tab browser ditutup)
+
+### Backend
+- ✅ API RESTful untuk produk, artikel, dan contact form
+- ✅ Upload gambar dengan Multer
+- ✅ Database MongoDB
+- ✅ Autentikasi admin dengan validasi username & password
+- ✅ CRUD produk & artikel
+- ✅ Email notifikasi dari form kontak (tanpa simpan ke database, reply-to sesuai email user)
+- ✅ Tidak ada penyimpanan data sensitif dari form kontak di database (hanya kirim email)
+- ✅ Keamanan sesi admin: auto logout jika idle 15 menit, sesi hilang jika browser/tab ditutup
+- ✅ Error handling dan validasi input di backend
 
 ### Backend
 - ✅ API REST untuk produk dan artikel

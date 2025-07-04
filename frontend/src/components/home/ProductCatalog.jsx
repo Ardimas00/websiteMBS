@@ -92,7 +92,9 @@ export default function ProductCatalog() {
                 <div className="text-[15px] text-[#374151] italic mb-5">{p.application}</div>
               )}
               <a
-                href="#kontak"
+                href={`https://wa.me/6282351138808?text=${encodeURIComponent(`halo, saya tertarik dengan produk ${p.name}. Mohon informasinya lebih lanjut, terima kasih.`)}`}
+                target="_blank"
+                rel="noopener noreferrer"
                 className="bg-[#10B981] hover:bg-green-700 text-white rounded-xl shadow px-6 py-2 font-medium mt-auto self-start transition"
               >
                 Hubungi Kami

@@ -21,6 +21,7 @@ async function sendContactMail({ name, email, message }) {
   await transporter.sendMail({
     from: 'majuberkahsantosa@gmail.com',
     to: 'majuberkahsantosa@gmail.com',
+    replyTo: email,
     subject: `Pesan Kontak Website dari ${name}`,
     html: `<p><b>Nama:</b> ${name}<br/><b>Email:</b> ${email}<br/><b>Pesan:</b><br/>${message}</p>`
   });

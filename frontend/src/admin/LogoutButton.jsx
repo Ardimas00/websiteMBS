@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 export default function LogoutButton() {
   const navigate = useNavigate();
   const handleLogout = () => {
-    localStorage.removeItem("admin_logged_in");
+    sessionStorage.removeItem("admin_logged_in");
     navigate("/login", { replace: true });
   };
   return (

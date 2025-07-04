@@ -23,10 +23,10 @@ export default function AdminLogin() {
     try {
       const res = await axios.post('http://localhost:5000/login', { username, password });
       if (res.data.success) {
-        localStorage.setItem("admin_logged_in", "true");
+        sessionStorage.setItem("admin_logged_in", "true");
         window.location.href = '/admin';
       } else {
-        localStorage.removeItem("admin_logged_in");
+        sessionStorage.removeItem("admin_logged_in");
         setError('Login gagal, username atau password salah!');
       }
     } catch {

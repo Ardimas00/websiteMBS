@@ -27,7 +27,7 @@ const Contact = () => {
     }
     setLoading(true);
     try {
-      const formToSend = { ...form, email: "majuberkahsantosa@gmail.com" };
+      const formToSend = { ...form };
       const res = await fetch("http://localhost:5000/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
