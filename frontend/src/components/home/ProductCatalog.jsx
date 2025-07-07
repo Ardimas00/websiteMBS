@@ -16,7 +16,7 @@ export default function ProductCatalog() {
     // fetch product dari backend
     const fetchProducts = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/products");
+        const res = await axios.get("/products");
         setProducts(res.data);
       } catch (err) {
         console.error("Error fetching products:", err);
@@ -76,7 +76,7 @@ export default function ProductCatalog() {
                   src={
                     p.imageUrl.startsWith('http')
                       ? p.imageUrl
-                      : `http://localhost:5000${p.imageUrl}`
+                      : p.imageUrl
                   }
                   alt={p.name}
                   className="w-full max-h-48 object-contain rounded-xl shadow-sm mb-6 bg-white border border-gray-100 p-2"

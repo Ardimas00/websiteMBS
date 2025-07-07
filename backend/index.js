@@ -18,7 +18,9 @@ app.use('/uploads', express.static('public/uploads'));
 
 
 // 🧠 Koneksi MongoDB
-mongoose.connect('mongodb://localhost:27017/websitembs')
+// 🧠 Koneksi MongoDB
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://emir:yohanis@mongodb.warungmicky.shop/nitipemir';
+mongoose.connect(MONGODB_URI)
   .then(() => console.log('✅ Connected to MongoDB'))
   .catch(err => console.error('❌ MongoDB Error:', err));
 
@@ -34,7 +36,11 @@ app.post('/login', async (req, res) => {
 });
 
 // 📦 CRUD PRODUK
-app.get('/products', async (_, res) => res.json(await Product.find()));
+app.get('/products', async (req, res) => {
+  const { q } = req.query;
+  const query = q ? { name: { $regex: q, $options: 'i' } } : {};
+  res.json(await Product.find(query));
+});
 app.post('/products', async (req, res) => {
   console.log('[POST /products] req.body:', req.body);
   const newProduct = await new Product(req.body).save();
@@ -48,7 +54,11 @@ app.put('/products/:id', async (req, res) => {
 app.delete('/products/:id', async (req, res) => res.json(await Product.findByIdAndDelete(req.params.id)));
 
 // 📰 CRUD ARTIKEL
-app.get('/articles', async (_, res) => res.json(await Article.find().sort({ createdAt: -1 })));
+app.get('/articles', async (req, res) => {
+  const { q } = req.query;
+  const query = q ? { title: { $regex: q, $options: 'i' } } : {};
+  res.json(await Article.find(query).sort({ createdAt: -1 }));
+});
 app.post('/articles', async (req, res) => res.json(await new Article(req.body).save()));
 app.put('/articles/:id', async (req, res) => res.json(await Article.findByIdAndUpdate(req.params.id, req.body, { new: true })));
 app.delete('/articles/:id', async (req, res) => res.json(await Article.findByIdAndDelete(req.params.id)));
@@ -61,7 +71,18 @@ app.use('/upload', uploadRoute);
 const contactRoute = require('./routes/contact');
 app.use('/contact', contactRoute);
 
+// 💻 Serve Frontend
+// Ini akan menyajikan file-file dari build React Anda
+app.use(express.static(path.join(__dirname, '..', 'frontend', 'build')));
+
+// Untuk semua rute lain yang tidak cocok dengan API, sajikan aplikasi React
+// Ini penting agar routing di sisi klien React (React Router) berfungsi
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'frontend', 'build', 'index.html'));
+});
+
 // 🚀 Jalankan server
-app.listen(5000, () => {
-  console.log('✅ Backend running on http://localhost:5000');
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`✅ Server running on port ${PORT}`);
 });

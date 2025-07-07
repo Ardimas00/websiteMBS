@@ -18,7 +18,7 @@ export default function AdminDashboard() {
 
   const load = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/products');
+      const res = await axios.get('/products');
       setProducts(res.data);
     } catch (err) {
       console.error('Error loading products:', err);
@@ -29,7 +29,7 @@ export default function AdminDashboard() {
     if (!file) return null;
     const formData = new FormData();
     formData.append('image', file);
-    const res = await axios.post('http://localhost:5000/upload', formData);
+    const res = await axios.post('/upload', formData);
     return res.data.url;
   };
 
@@ -46,7 +46,7 @@ export default function AdminDashboard() {
       if (file) {
         const formData = new FormData();
         formData.append('image', file);
-        const res = await axios.post('http://localhost:5000/upload', formData);
+        const res = await axios.post('/upload', formData);
         imageUrl = res.data.url;
       }
 
@@ -54,10 +54,10 @@ export default function AdminDashboard() {
 
       if (editId) {
         // PUT untuk update produk
-        await axios.put(`http://localhost:5000/products/${editId}`, payload);
+        await axios.put(`/products/${editId}`, payload);
       } else {
         // POST untuk tambah produk baru
-        await axios.post('http://localhost:5000/products', payload);
+        await axios.post('/products', payload);
       }
 
       setForm({ name: '', description: '', imageUrl: '' });
@@ -71,7 +71,7 @@ export default function AdminDashboard() {
 
   const remove = async id => {
     try {
-      await axios.delete(`http://localhost:5000/products/${id}`);
+      await axios.delete(`/products/${id}`);
       load();
     } catch (err) {
       console.error('Error deleting product:', err);
@@ -86,8 +86,8 @@ export default function AdminDashboard() {
 
   useEffect(() => {
     // Info ringkas
-    axios.get('http://localhost:5000/products').then(res => setProducts(res.data));
-    axios.get('http://localhost:5000/articles').then(res => setArticles(res.data));
+    axios.get('/products').then(res => setProducts(res.data));
+    axios.get('/articles').then(res => setArticles(res.data));
   }, []);
 
   return (

@@ -16,7 +16,7 @@ const ArticleDetail = () => {
     const fetchArticle = async () => {
       try {
         // Coba ambil semua artikel dan cari berdasarkan slug atau ID
-        const res = await axios.get("http://localhost:5000/articles");
+        const res = await axios.get("/articles");
         const foundArticle = res.data.find(a => a.slug === slug || a._id === slug);
         
         if (foundArticle) {
@@ -72,7 +72,7 @@ const ArticleDetail = () => {
             src={
               article.img.startsWith("http")
                 ? article.img
-                : `http://localhost:5000${article.img}`
+                : article.img
             }
             alt={article.title} 
             className="w-full max-h-72 object-cover rounded-xl shadow mb-6 border border-gray-100"

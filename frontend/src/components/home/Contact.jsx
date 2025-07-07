@@ -28,7 +28,7 @@ const Contact = () => {
     setLoading(true);
     try {
       const formToSend = { ...form };
-      const res = await fetch("http://localhost:5000/contact", {
+      const res = await fetch("/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formToSend),
@@ -99,18 +99,18 @@ const Contact = () => {
           <div className="mt-8">
             <div className="font-semibold text-lg text-[#1F2937] mb-2">Jam Operasional</div>
             <div className="text-[#374151] mb-4">Senin - Sabtu: 08.00 - 17.00 WIB</div>
-            <a href="https://www.google.com/maps/place/0%C2%B005'21.2%22S+109%C2%B020'37.5%22E/@-0.089232,109.343751,17z/data=!3m1!4b1!4m4!3m3!8m2!3d-0.089232!4d109.343751?entry=ttu" target="_blank" rel="noopener noreferrer" className="inline-block bg-[#10B981] hover:bg-green-700 text-white px-6 py-2 rounded-xl font-medium shadow transition mb-4">Buka di Google Maps</a>
+            <a href="https://www.google.com/maps/search/?api=1&query=Toko+Pertanian+SJU" target="_blank" rel="noopener noreferrer" className="inline-block bg-[#10B981] hover:bg-green-700 text-white px-6 py-2 rounded-xl font-medium shadow transition mb-4">Buka di Google Maps</a>
             <div className="w-full h-48 md:h-56 rounded-2xl shadow-lg overflow-hidden">
-              <iframe
+              <iframe 
                 title="Lokasi Kami"
-                src="https://www.google.com/maps?q=-0.089232,109.343751&hl=id&z=17&output=embed"
-                width="100%"
-                height="100%"
-                style={{ border: 0 }}
-                allowFullScreen=""
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8618.466538117!2d109.39167297461921!3d-0.11608413047083557!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e1d515067e755cd%3A0xf848a4fc6f46399b!2sToko%20Pertanian%20SJU!5e0!3m2!1sen!2sid!4v1751718355210!5m2!1sen!2sid" 
+                width="100%" 
+                height="100%" 
+                style={{ border:0 }} 
+                allowFullScreen="" 
+                loading="lazy" 
+                referrerPolicy="no-referrer-when-downgrade">
+              </iframe>
             </div>
           </div>
         </div>

@@ -19,14 +19,18 @@ const OtherProducts = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [searchTerm, setSearchTerm] = useState("");
+  const [searchInput, setSearchInput] = useState("");
 
   useEffect(() => {
     AOS.init({ once: true, duration: 800 });
 
     const fetchProducts = async () => {
+      setLoading(true);
       try {
-        const res = await axios.get("http://localhost:5000/products");
+        const res = await axios.get(`/products?q=${searchTerm}`);
         setProducts(res.data);
+        setError("");
       } catch (err) {
         console.error("Gagal memuat produk:", err);
         setError("Gagal memuat produk");
@@ -36,7 +40,12 @@ const OtherProducts = () => {
     };
 
     fetchProducts();
-  }, []);
+  }, [searchTerm]);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearchTerm(searchInput);
+  };
 
   const filteredProducts =
     activeCategory === "Semua"
@@ -76,6 +85,19 @@ const OtherProducts = () => {
           Lihat berbagai bahan untuk kebutuhan pertanian Anda
         </p>
 
+        <form onSubmit={handleSearch} className="flex justify-center mb-10 gap-2" data-aos="fade-up" data-aos-delay="150">
+          <input
+            type="text"
+            placeholder="Cari nama produk..."
+            value={searchInput}
+            onChange={(e) => setSearchInput(e.target.value)}
+            className="px-4 py-2 border border-gray-300 rounded-full w-full max-w-sm focus:ring-2 focus:ring-[#10B981] focus:outline-none"
+          />
+          <button type="submit" className="px-5 py-2 rounded-full bg-[#10B981] text-white font-semibold transition-all duration-200 hover:bg-green-700">
+            Cari
+          </button>
+        </form>
+
         <div className="flex flex-wrap gap-3 justify-center mb-10">
           {CATEGORY_LIST.map((cat) => (
             <button
@@ -108,7 +130,7 @@ const OtherProducts = () => {
                     src={
                       p.imageUrl.startsWith("http")
                         ? p.imageUrl
-                        : `http://localhost:5000${p.imageUrl}`
+                        : p.imageUrl
                     }
                     alt={p.name}
                     className="w-full max-h-48 object-contain rounded-xl shadow-sm mb-6 bg-white border border-gray-100 p-2"

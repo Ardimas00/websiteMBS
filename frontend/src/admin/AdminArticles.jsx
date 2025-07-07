@@ -5,9 +5,10 @@ import { Link } from "react-router-dom";
 import Modal from '../components/Modal';
 
 export default function AdminArticles() {
-  useEffect(() => { load(); }, []);
   const [showModal, setShowModal] = useState(false);
   const [articles, setArticles] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchInput, setSearchInput] = useState('');
   const [form, setForm] = useState({
     title: "",
     slug: "",
@@ -19,6 +20,18 @@ export default function AdminArticles() {
   });
   const [file, setFile] = useState(null);
   const [editId, setEditId] = useState(null);
+
+  const load = async () => {
+    const res = await axios.get(`/articles?q=${searchTerm}`);
+    setArticles(res.data);
+  };
+
+  useEffect(() => { load(); }, [searchTerm]);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearchTerm(searchInput);
+  };
 
   const handleEdit = (article) => {
     setForm({
@@ -37,22 +50,16 @@ export default function AdminArticles() {
 
   const handleDelete = async (id) => {
     if(window.confirm('Yakin ingin menghapus artikel ini?')) {
-      await axios.delete(`http://localhost:5000/articles/${id}`);
+      await axios.delete(`/articles/${id}`);
       load();
     }
-  };
-
-
-  const load = async () => {
-    const res = await axios.get("http://localhost:5000/articles");
-    setArticles(res.data);
   };
 
   const uploadImage = async () => {
     if (!file) return null;
     const formData = new FormData();
     formData.append("image", file);
-    const res = await axios.post("http://localhost:5000/upload", formData);
+    const res = await axios.post("/upload", formData);
     return res.data.url;
   };
 
@@ -71,17 +78,15 @@ export default function AdminArticles() {
       payload.date = `${yyyy}-${mm}-${dd}`;
     }
     if (editId) {
-      await axios.put(`http://localhost:5000/articles/${editId}`, payload);
+      await axios.put(`/articles/${editId}`, payload);
     } else {
-      await axios.post("http://localhost:5000/articles", payload);
+      await axios.post("/articles", payload);
     }
     setForm({ title: "", slug: "", desc: "", category: "", date: "", content: "", img: "" });
     setFile(null);
     setEditId(null);
     load();
   };
-
-
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-100 p-8 flex flex-col items-center">
@@ -187,7 +192,19 @@ export default function AdminArticles() {
           </div>
         </Modal>
         <div className="bg-white/80 rounded-2xl shadow-xl p-8 border border-blue-100">
-          <h3 className="text-xl font-bold mb-4">Daftar Artikel</h3>
+          <div className="flex flex-col md:flex-row justify-between md:items-center mb-4 gap-4">
+            <h3 className="text-xl font-bold">Daftar Artikel</h3>
+            <form onSubmit={handleSearch} className="flex gap-2">
+              <input
+                type="text"
+                placeholder="Cari artikel..."
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                className="border p-2 rounded focus:outline-none focus:ring-2 focus:ring-blue-400"
+              />
+              <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700">Cari</button>
+            </form>
+          </div>
           <div className="overflow-x-auto rounded-xl border border-gray-200">
             <table className="w-full text-sm border-collapse">
               <thead>
@@ -208,12 +225,14 @@ export default function AdminArticles() {
                     } hover:shadow-lg hover:scale-[1.01]`}
                   >
                     <td className="border-b border-gray-200 px-4 py-2 font-semibold">
-                      {a.title}
+                      <p className="max-w-xs truncate" title={a.title}>
+                        {a.title}
+                      </p>
                     </td>
                     <td className="border-b border-gray-200 px-4 py-2 text-center">
                       {a.img ? (
                         <img
-                          src={a.img?.startsWith('http') ? a.img : `http://localhost:5000${a.img}`}
+                          src={a.img}
                           alt={a.title}
                           className="h-16 w-16 object-contain mx-auto rounded-lg border border-gray-200 shadow transition-all duration-150 hover:scale-105"
                         />

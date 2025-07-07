@@ -8,7 +8,7 @@ export default function AdminLogin() {
 
   const login = async () => {
     try {
-      const res = await axios.post('http://localhost:5000/login', { username, password });
+      const res = await axios.post('/login', { username, password });
       if (res.data.success) window.location.href = '/admin';
       else alert('Login gagal');
     } catch {
@@ -21,7 +21,7 @@ export default function AdminLogin() {
   const handleLogin = async () => {
     setError("");
     try {
-      const res = await axios.post('http://localhost:5000/login', { username, password });
+      const res = await axios.post('/login', { username, password });
       if (res.data.success) {
         sessionStorage.setItem("admin_logged_in", "true");
         window.location.href = '/admin';

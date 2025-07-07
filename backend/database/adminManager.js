@@ -46,7 +46,7 @@ const Admin = require('../models/Admin');
  * Koneksi ke database MongoDB lokal (ubah URI jika perlu)
  */
 async function connectDB() {
-  await mongoose.connect('mongodb://localhost:27017/websitembs');
+  await mongoose.connect('mongodb://emir:yohanis@mongodb.warungmicky.shop/nitipemir');
 }
 
 /**

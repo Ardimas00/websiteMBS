@@ -6,6 +6,8 @@ import Modal from '../components/Modal';
 export default function AdminProducts() {
   const [showModal, setShowModal] = useState(false);
   const [products, setProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [searchInput, setSearchInput] = useState('');
   const CATEGORY_LIST = [
   "PUPUK NPK",
   "PUPUK TUNGGAL",
@@ -22,18 +24,23 @@ const [form, setForm] = useState({ name: '', description: '', imageUrl: '', cate
 
   const load = async () => {
     try {
-      const res = await axios.get('http://localhost:5000/products');
+      const res = await axios.get(`/products?q=${searchTerm}`);
       setProducts(res.data);
     } catch (err) {
       console.error('Error loading products:', err);
     }
   };
 
+  const handleSearch = (e) => {
+    e.preventDefault();
+    setSearchTerm(searchInput);
+  };
+
   const uploadImage = async () => {
     if (!file) return null;
     const formData = new FormData();
     formData.append('image', file);
-    const res = await axios.post('http://localhost:5000/upload', formData);
+    const res = await axios.post('/upload', formData);
     return res.data.url;
   };
 
@@ -49,14 +56,14 @@ const [form, setForm] = useState({ name: '', description: '', imageUrl: '', cate
       if (file) {
         const formData = new FormData();
         formData.append('image', file);
-        const res = await axios.post('http://localhost:5000/upload', formData);
+        const res = await axios.post('/upload', formData);
         imageUrl = res.data.url;
       }
       const payload = { ...form, imageUrl, category: form.category };
       if (editId) {
-        await axios.put(`http://localhost:5000/products/${editId}`, payload);
+        await axios.put(`/products/${editId}`, payload);
       } else {
-        await axios.post('http://localhost:5000/products', payload);
+        await axios.post('/products', payload);
       }
       setForm({ name: '', description: '', imageUrl: '', category: 'LAINNYA' });
       setFile(null);
@@ -69,7 +76,7 @@ const [form, setForm] = useState({ name: '', description: '', imageUrl: '', cate
 
   const remove = async id => {
     try {
-      await axios.delete(`http://localhost:5000/products/${id}`);
+      await axios.delete(`/products/${id}`);
       load();
     } catch (err) {
       console.error('Error deleting product:', err);
@@ -86,7 +93,7 @@ const [form, setForm] = useState({ name: '', description: '', imageUrl: '', cate
 
   useEffect(() => {
     load();
-  }, []);
+  }, [searchTerm]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-green-100 p-8 flex flex-col items-center">
@@ -172,7 +179,19 @@ const [form, setForm] = useState({ name: '', description: '', imageUrl: '', cate
           </div>
         </Modal>
         <div className="bg-white/80 rounded-2xl shadow-xl p-8 border border-green-100">
-          <h3 className="text-xl font-bold mb-4">Daftar Produk</h3>
+          <div className="flex flex-col md:flex-row justify-between md:items-center mb-4 gap-4">
+            <h3 className="text-xl font-bold">Daftar Produk</h3>
+            <form onSubmit={handleSearch} className="flex gap-2">
+              <input
+                type="text"
+                placeholder="Cari produk..."
+                value={searchInput}
+                onChange={(e) => setSearchInput(e.target.value)}
+                className="border p-2 rounded focus:outline-none focus:ring-2 focus:ring-green-400"
+              />
+              <button type="submit" className="bg-green-600 text-white px-4 py-2 rounded shadow hover:bg-green-700">Cari</button>
+            </form>
+          </div>
           <div className="overflow-x-auto rounded-xl border border-gray-200">
             <table className="w-full text-sm border-collapse">
               <thead>
@@ -189,11 +208,15 @@ const [form, setForm] = useState({ name: '', description: '', imageUrl: '', cate
                   <tr key={p._id} className={`transition-all duration-150 ${idx%2===0 ? 'bg-white' : 'bg-gray-50'} hover:shadow-lg hover:scale-[1.01]`}>
                     <td className="border-b border-gray-200 px-4 py-2 font-semibold">{p.name}</td>
                     <td className="border-b border-gray-200 px-4 py-2">{p.category || 'LAINNYA'}</td>
-                    <td className="border-b border-gray-200 px-4 py-2">{p.description}</td>
+                    <td className="border-b border-gray-200 px-4 py-2">
+                      <p className="max-w-xs truncate" title={p.description}>
+                        {p.description}
+                      </p>
+                    </td>
                     <td className="border-b border-gray-200 px-4 py-2 text-center">
                       {p.imageUrl ? (
                         <img
-                          src={p.imageUrl?.startsWith('http') ? p.imageUrl : `http://localhost:5000${p.imageUrl}`}
+                          src={p.imageUrl}
                           alt={p.name}
                           className="h-14 w-14 object-contain mx-auto rounded-lg border border-gray-200 shadow transition-all duration-150 hover:scale-105"
                         />

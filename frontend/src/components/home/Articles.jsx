@@ -12,7 +12,7 @@ const ArticlesList = () => {
 
     const fetchArticles = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/articles");
+        const res = await axios.get("/articles");
         setArticles(res.data);
       } catch (err) {
         console.error("Gagal memuat artikel:", err);
@@ -38,7 +38,7 @@ const ArticlesList = () => {
               a.img?.startsWith("http")
                 ? a.img
                 : a.img
-                ? `http://localhost:5000${a.img}`
+                ? a.img
                 : null;
 
             return (
