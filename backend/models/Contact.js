@@ -8,3 +8,5 @@ const ContactSchema = new mongoose.Schema({
 });
 
 module.exports = mongoose.model('Contact', ContactSchema);
+
+// ini ga ngaruh ke database mongoDB karena contact langsung nge direct ke email

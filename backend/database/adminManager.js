@@ -1,4 +1,10 @@
 /**
+ * 
+ * 
+ * dummy dari database dan seperti seader pada laravel
+ * 
+ * 
+ * 
  * adminManager.js
  *
  * Script CLI untuk mengelola akun admin MongoDB secara aman dan praktis.

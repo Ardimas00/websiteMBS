@@ -155,14 +155,12 @@ export default function AdminArticles() {
                 />
                 <div className="md:col-span-2">
                   <Editor
-                    apiKey="489fzag6qiqhzdtvwte21vh1l2fevkcnj3r2bbraq2my9lp0"
+                    apiKey="fnvtlssvv0d4jyxsfgbhgncqbwqe8kad18cirsxxgn9tfi2g"
                     value={form.content}
                     onEditorChange={(content) => setForm({ ...form, content })}
                     init={{
                       height: 220,
-                      menubar: false,
-                      plugins: "link image code",
-                      toolbar: "undo redo | bold italic | code",
+                      menubar: false
                     }}
                   />
                 </div>

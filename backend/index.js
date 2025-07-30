@@ -19,7 +19,7 @@ app.use('/uploads', express.static('public/uploads'));
 
 // 🧠 Koneksi MongoDB
 // 🧠 Koneksi MongoDB
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://emir:yohanis@mongodb.warungmicky.shop/nitipemir';
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://localhost:27017/websitembs';
 mongoose.connect(MONGODB_URI)
   .then(() => console.log('✅ Connected to MongoDB'))
   .catch(err => console.error('❌ MongoDB Error:', err));
